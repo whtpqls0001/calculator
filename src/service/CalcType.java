@@ -14,7 +14,10 @@ public enum CalcType {
 			return cmgr.multiplication(inputNum1, inputNum2);}}, 
 	DIVISION("/"){
 		double function(double inputNum1, double inputNum2, CalcManager cmgr) { 
-			return cmgr.division(inputNum1, inputNum2);}};
+			return cmgr.division(inputNum1, inputNum2);}},
+	POWER("^"){
+		double function(double inputNum1, double inputNum2, CalcManager cmgr) {
+			return cmgr.power(inputNum1, (int)inputNum2);}};
 
 	private String symbol;
 	

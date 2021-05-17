@@ -27,13 +27,10 @@ public class CalcService {
 	
 	public double executeCalc() {
 		selectType();
-		
-		return calcType.function(inputBean.getInputNum1(), inputBean.getInputNum2(), cmgr);
-	}
-	
-	private CalcType selectType() {
-		calcType = typeMap.get(symbol);
-		return calcType;
+		double result = calcType.function(inputBean.getInputNum1(), inputBean.getInputNum2(), cmgr);
+		inputBean.setResult(result);
+		inputBean.setInputNum1(result);
+		return result;
 	}
 	
 	public void input(Object input) {
@@ -43,6 +40,12 @@ public class CalcService {
 			this.symbol = (String)input;
 		}
 	}
+	
+	private CalcType selectType() {
+		calcType = typeMap.get(symbol);
+		return calcType;
+	}
+	
 }
 
 
