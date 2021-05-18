@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import bean.InputBean;
-import manager.CalcManager;
+import manager.*;
 
 public class ManagerTest {
 	
@@ -25,7 +25,7 @@ public class ManagerTest {
 	@Before
 	public void setUp() {
 		inputBean = new InputBean();
-		cmgr = new CalcManager();
+		cmgr = new CalcManagerImpl();
 	}
 	
 	@Test
@@ -47,17 +47,7 @@ public class ManagerTest {
 		assertThat(cmgr.addition(inputNum1, inputNum2), is(inputNum1 + inputNum2));
 		assertThat(cmgr.substraction(inputNum1, inputNum2), is(inputNum1 - inputNum2));
 		assertThat(cmgr.multiplication(inputNum1, inputNum2), is(inputNum1 * inputNum2));
-		assertThat(cmgr.division(inputNum1, inputNum2), is(inputNum1 / inputNum2));
+		assertThat(cmgr.division(inputNum2, inputNum1), is(0d));
 	}
-	
-	@Test
-	public void newInputTest() {
-		cmgr.newInput(inputNum1, inputBean);
-		assertThat(inputBean.getInputNum1(), is(inputNum1));
-		assertThat(inputBean.getInputNum2(), is(0d));
-		
-		cmgr.newInput(inputNum2, inputBean);
-		assertThat(inputBean.getInputNum1(), is(inputNum1));
-		assertThat(inputBean.getInputNum2(), is(inputNum2));
-	}
+
 }

@@ -7,8 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import bean.InputBean;
-import service.CalcService;
-import service.CalcType;
+import service.*;
 
 
 public class ServiceTest {
@@ -29,19 +28,18 @@ public class ServiceTest {
 	
 	@Before
 	public void setUp(){
-		csvc = new CalcService();
-		inputBean = new InputBean(inputNum1, inputNum2);
+		csvc = new CalcServiceImpl();
 	}
 	
 	@Test
 	public void ExecuteCalcTest() {
-		csvc.setSymbol(symbol1);
+		csvc.input(symbol1);
 		assertThat(csvc.executeCalc(), is(0d));
 	}
 	
 	@Test(expected = NullPointerException.class)
 	public void ExecuteCalcExceptionTest() {
-		csvc.setSymbol("=");
+		csvc.input("=");
 		assertThat(csvc.executeCalc(), is(inputNum1 + inputNum2));
 	}
 	

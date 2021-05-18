@@ -1,6 +1,6 @@
 package service;
 
-import manager.CalcManager;
+import manager.*;
 
 public enum CalcType {
 	ADDITION("+"){
