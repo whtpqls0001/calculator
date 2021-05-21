@@ -1,26 +1,33 @@
 package bean;
 
+import java.math.BigDecimal;
+
 public class InputBean {
-	private double inputNum1 = 0;
-	private double inputNum2 = 0;
-	private double result = 0;
+	
+	final static BigDecimal ZERO = BigDecimal.ZERO;
+	final static BigDecimal ONE = BigDecimal.ONE;
+	final static BigDecimal TEN	= BigDecimal.TEN;
+	
+	private BigDecimal inputNum1 = ZERO;
+	private BigDecimal inputNum2 = ZERO;
+	private BigDecimal result = ZERO;
 	private boolean isNewInput = true;
 	
 	public InputBean(){}
-	public InputBean(double inputNum1, double inputNum2){
-		this.inputNum1 = inputNum1;
-		this.inputNum2 = inputNum2;
+	public InputBean(String inputNum1, String inputNum2){
+		this.inputNum1 = new BigDecimal(inputNum1);
+		this.inputNum2 = new BigDecimal(inputNum2);
 	}
 	
-	public double getInputNum1() { return inputNum1; }
-	public void setInputNum1(double inputNum1) { this.inputNum1 = inputNum1; }
+	public BigDecimal getInputNum1() { return inputNum1; }
+	public void setInputNum1(String inputNum1) { this.inputNum1 = new BigDecimal(inputNum1); }
 	
-	public double getInputNum2() { return inputNum2; }
-	public void setInputNum2(double inputNum2) { this.inputNum2 = inputNum2; }
+	public BigDecimal getInputNum2() { return inputNum2; }
+	public void setInputNum2(String inputNum2) { this.inputNum2 = new BigDecimal(inputNum2); }
 	
 	public boolean getIsNewInput() { return isNewInput; }
 	public void setIsNewInput(boolean isNewInput) { this.isNewInput = isNewInput;}
 	
-	public double getResult() {	return result; }
-	public void setResult(double result) { this.result = result; }
+	public BigDecimal getResult() {	return result; }
+	public void setResult(String result) { this.result = new BigDecimal(result); }
 }

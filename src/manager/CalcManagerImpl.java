@@ -1,38 +1,67 @@
 package manager;
 
-import bean.InputBean;
+import java.math.BigDecimal;
+import java.math.*;
 
 public class CalcManagerImpl implements CalcManager{
 
+	final static BigDecimal ZERO = BigDecimal.ZERO;
+	final static BigDecimal ONE = BigDecimal.ONE;
+	final static BigDecimal TEN	= BigDecimal.TEN;
+	
 	public CalcManagerImpl(){}
 	
-	public double addition(double n1, double n2) {
-		return n1 + n2;
+	public BigDecimal addition(BigDecimal n1, BigDecimal n2) {
+		return n1.add(n2);
 	}
 	
-	public double substraction(double n1, double n2) {
-		return n1 - n2;
+	public BigDecimal substraction(BigDecimal n1, BigDecimal n2) {
+		return n1.subtract(n2);
 	}
 	
-	public double multiplication(double n1, double n2) {
-		return n1 * n2;
+	public BigDecimal multiplication(BigDecimal n1, BigDecimal n2) {
+		return n1.multiply(n2).stripTrailingZeros();
 	}
 	
-	public double division(double n1, double n2) {
-		if(n2 == 0) return 0d;
-		return n1 / n2; // check division by 0!
+	public BigDecimal division(BigDecimal n1, BigDecimal n2) {
+		return n1.divide(n2, 7, RoundingMode.HALF_EVEN).stripTrailingZeros(); // check division by 0!
 	}
 	
-	public double power(double n1, int n2) {
-		double result = 1;
-		for(int i = 0; i < n2; i++) { result *= n1;}
-		if(n2 >= 0) {
-			return result;
-		}else {
-			return 1 / result;
+	public BigDecimal power(BigDecimal n1, BigDecimal n2) {
+		BigDecimal result = BigDecimal.ONE;
+		for(int i = 0; i < Math.abs(n2.intValue()); i++) {
+			result = result.multiply(n1);
 		}
+		if(n2.compareTo(ZERO) >= 0) {
+			return result;	
+		}else {
+			return ONE.divide(result, 7, RoundingMode.HALF_EVEN);
+		}
+		
 	}
 	
+	public BigDecimal root(BigDecimal n1, BigDecimal n2) {
+		BigDecimal result = ZERO;
+		BigDecimal operator = ONE;
+		final BigDecimal minOperator = power(TEN, new BigDecimal("-4"));
+		while(operator.compareTo(minOperator) > 0) {
+			while(power(result , n2).compareTo(n1) < 0) {
+				result = result.add(operator);
+				System.out.println(result);
+				System.out.println(operator);
+			}
+			if(power(result, n2).equals(n1)) {
+				break;
+			}
+			
+			result = result.subtract(operator);
+			operator = operator.multiply(new BigDecimal("0.1"));
+			
+		}
+		
+		
+		return result;
+	}
 	
 	
 }

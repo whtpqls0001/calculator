@@ -1,9 +1,12 @@
 package manager;
 
+import java.math.BigDecimal;
+
 public interface CalcManager {
-	public double addition(double n1, double n2);
-	public double substraction(double n1, double n2);
-	public double multiplication(double n1, double n2);
-	public double division(double n1, double n2);
-	public double power(double n1, int n2);
+	public BigDecimal addition(BigDecimal n1, BigDecimal n2);
+	public BigDecimal substraction(BigDecimal n1, BigDecimal n2);
+	public BigDecimal multiplication(BigDecimal n1, BigDecimal n2);
+	public BigDecimal division(BigDecimal n1, BigDecimal n2);
+	public BigDecimal power(BigDecimal n1, BigDecimal n2);
+	public BigDecimal root(BigDecimal n1, BigDecimal n2);
 }
