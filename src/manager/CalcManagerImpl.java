@@ -1,13 +1,16 @@
 package manager;
 
 import java.math.BigDecimal;
+
+import exception.CannotRootNegativeException;
+
 import java.math.*;
 
 public class CalcManagerImpl implements CalcManager{
 
-	final static BigDecimal ZERO = BigDecimal.ZERO;
-	final static BigDecimal ONE = BigDecimal.ONE;
-	final static BigDecimal TEN	= BigDecimal.TEN;
+	final static BigDecimal ZERO = BigDecimal.valueOf(0.0);
+	final static BigDecimal ONE = BigDecimal.valueOf(1.0);
+	final static BigDecimal TEN	= BigDecimal.valueOf(10.0);
 	
 	public CalcManagerImpl(){}
 	
@@ -28,7 +31,7 @@ public class CalcManagerImpl implements CalcManager{
 	}
 	
 	public BigDecimal power(BigDecimal n1, BigDecimal n2) {
-		BigDecimal result = BigDecimal.ONE;
+		BigDecimal result = ONE;
 		for(int i = 0; i < Math.abs(n2.intValue()); i++) {
 			result = result.multiply(n1);
 		}
@@ -40,7 +43,8 @@ public class CalcManagerImpl implements CalcManager{
 		
 	}
 	
-	public BigDecimal root(BigDecimal n1, BigDecimal n2) {
+	public BigDecimal root(BigDecimal n1, BigDecimal n2) throws CannotRootNegativeException {
+		if(n1.compareTo(ZERO) < 0 || n2.compareTo(ZERO) < 0) throw new CannotRootNegativeException("Cannot Root with Negative Numbers");
 		BigDecimal result = ZERO;
 		BigDecimal operator = ONE;
 		final BigDecimal minOperator = power(TEN, new BigDecimal("-4"));

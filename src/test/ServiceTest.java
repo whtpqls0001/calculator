@@ -22,8 +22,9 @@ public class ServiceTest {
 	private String symbol3 = "*";
 	private String symbol4 = "/";
 	private String symbol5 = "^";
+	private String symbol6 = "R";
 	
-	private CalcService csvc;
+	private CalcService csvc; 
 	private InputBean inputBean;
 	
 	@Before
@@ -34,13 +35,13 @@ public class ServiceTest {
 	@Test
 	public void ExecuteCalcTest() {
 		csvc.input(symbol1);
-		assertThat(csvc.executeCalc(), is(0d));
+		assertThat(csvc.executeCalc(), is("0"));
 	}
 	
 	@Test(expected = NullPointerException.class)
 	public void ExecuteCalcExceptionTest() {
 		csvc.input("=");
-		assertThat(csvc.executeCalc(), is(inputNum1 + inputNum2));
+		assertThat(csvc.executeCalc(), is("0"));
 	}
 	
 	@Test
@@ -48,10 +49,10 @@ public class ServiceTest {
 		csvc.input(1d);
 		csvc.input(symbol5);
 		csvc.input(0d);
-		assertThat(csvc.executeCalc(), is(1d));
+		assertThat(csvc.executeCalc(), is("1.0")); 
 		csvc.input(symbol1);
 		csvc.input(inputNum4);
-		assertThat(csvc.executeCalc(), is(1d + inputNum4));
+		assertThat(csvc.executeCalc(), is("101.0"));
 		
 	}
 }

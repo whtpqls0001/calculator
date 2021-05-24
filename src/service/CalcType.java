@@ -1,25 +1,33 @@
 package service;
 
-import manager.*;
+import java.math.BigDecimal;
+
+import exception.CannotRootNegativeException;
+import manager.CalcManager;
+import manager.CalcManagerImpl;
 
 public enum CalcType {
 	ADDITION("+"){
-		double function(double inputNum1, double inputNum2, CalcManager cmgr) { 
-			return cmgr.addition(inputNum1, inputNum2);}},
+				BigDecimal function(BigDecimal inputNum1, BigDecimal inputNum2) { 
+					return cmgr.addition(inputNum1, inputNum2);}},
 	SUBSTRACTION("-"){
-		double function(double inputNum1, double inputNum2, CalcManager cmgr) { 
-			return cmgr.substraction(inputNum1, inputNum2);}}, 
+				BigDecimal function(BigDecimal inputNum1, BigDecimal inputNum2) {
+					return cmgr.substraction(inputNum1, inputNum2);}}, 
 	MULTIPLICATION("*"){
-		double function(double inputNum1, double inputNum2, CalcManager cmgr) { 
-			return cmgr.multiplication(inputNum1, inputNum2);}}, 
+				BigDecimal function(BigDecimal inputNum1, BigDecimal inputNum2) { 
+					return cmgr.multiplication(inputNum1, inputNum2);}}, 
 	DIVISION("/"){
-		double function(double inputNum1, double inputNum2, CalcManager cmgr) { 
-			return cmgr.division(inputNum1, inputNum2);}},
+				BigDecimal function(BigDecimal inputNum1, BigDecimal inputNum2) { 
+					return cmgr.division(inputNum1, inputNum2);}},
 	POWER("^"){
-		double function(double inputNum1, double inputNum2, CalcManager cmgr) {
-			return cmgr.power(inputNum1, (int)inputNum2);}};
+				BigDecimal function(BigDecimal inputNum1, BigDecimal inputNum2) {
+					return cmgr.power(inputNum1, inputNum2);}},
+	ROOT("R"){
+				BigDecimal function(BigDecimal inputNum1, BigDecimal inputNum2) throws CannotRootNegativeException {
+					return cmgr.root(inputNum1, inputNum2);}};
 
 	private String symbol;
+	private static CalcManager cmgr = new CalcManagerImpl();
 	
 	private CalcType(String symbol) {
 		this.symbol = symbol;
@@ -29,6 +37,6 @@ public enum CalcType {
 		return symbol;
 	}
 	
-	abstract double function(double inputNum1, double inputNum2, CalcManager cmgr);
+	abstract BigDecimal function(BigDecimal inputNum1, BigDecimal inputNum2) throws CannotRootNegativeException;
 }
 

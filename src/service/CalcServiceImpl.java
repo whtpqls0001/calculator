@@ -3,13 +3,11 @@ package service;
 import java.util.HashMap;
 
 import bean.InputBean;
-import manager.*;
+import exception.CannotRootNegativeException;
 
 public class CalcServiceImpl implements CalcService{
 	
 	private String symbol;
-	private CalcType calcType;
-	private CalcManager cmgr = new CalcManagerImpl();
 	private InputBean inputBean = new InputBean();
 	private HashMap<String, CalcType> typeMap = new HashMap<>();
 	{
@@ -25,20 +23,25 @@ public class CalcServiceImpl implements CalcService{
 	public void setSymbol(String symbol) { this.symbol = symbol; }
 	
 	
-	public double executeCalc() {
-		double result = typeMap.get(symbol).function(inputBean.getInputNum1(), inputBean.getInputNum2(), cmgr);
-		inputBean.setResult(result);
-		inputBean.setInputNum1(result);
-		return result;
+	public String executeCalc() {
+		try {
+			String result = typeMap.get(symbol).function(inputBean.getInputNum1(), inputBean.getInputNum2()).toString();
+			inputBean.setResult(result); 
+			inputBean.setInputNum1(result);
+			return result;
+		} catch(CannotRootNegativeException e) {
+			return e.getMessage();
+		}
+		
 	}
 	
 	public void input(Object input) {
 		if(input.getClass() == Double.class) {
 			if(inputBean.getIsNewInput()) {
-				inputBean.setInputNum1((double)input);
+				inputBean.setInputNum1(Double.toString((double)input));
 				inputBean.setIsNewInput(false);
 			}else {
-				inputBean.setInputNum2((double)input);
+				inputBean.setInputNum2(Double.toString((double)input));
 			}
 		}else if(input.getClass() == String.class) {
 			this.symbol = (String)input;
