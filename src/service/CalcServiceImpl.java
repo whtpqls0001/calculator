@@ -25,7 +25,7 @@ public class CalcServiceImpl implements CalcService{
 	
 	public String executeCalc() {
 		try {
-			String result = typeMap.get(symbol).function(inputBean.getInputNum1(), inputBean.getInputNum2()).toString();
+			String result = typeMap.get(symbol).function(inputBean.getInputNum1(), inputBean.getInputNum2()).toPlainString();
 			inputBean.setResult(result); 
 			inputBean.setInputNum1(result);
 			return result;

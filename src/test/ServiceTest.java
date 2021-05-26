@@ -23,6 +23,7 @@ public class ServiceTest {
 	private String symbol4 = "/";
 	private String symbol5 = "^";
 	private String symbol6 = "R";
+	private String symbol7 = "!";
 	
 	private CalcService csvc; 
 	private InputBean inputBean;
@@ -46,13 +47,13 @@ public class ServiceTest {
 	
 	@Test
 	public void mainTest() {
-		csvc.input(1d);
-		csvc.input(symbol5);
-		csvc.input(0d);
-		assertThat(csvc.executeCalc(), is("1.0")); 
+		csvc.input(156d);
 		csvc.input(symbol1);
-		csvc.input(inputNum4);
-		assertThat(csvc.executeCalc(), is("101.0"));
+		csvc.input(44d);
+		assertThat(csvc.executeCalc(), is("200")); 
+//		csvc.input(symbol1);
+//		csvc.input(inputNum4);
+//		assertThat(csvc.executeCalc(), is("101.0"));
 		
 	}
 }

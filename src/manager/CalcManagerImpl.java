@@ -15,11 +15,11 @@ public class CalcManagerImpl implements CalcManager{
 	public CalcManagerImpl(){}
 	
 	public BigDecimal addition(BigDecimal n1, BigDecimal n2) {
-		return n1.add(n2);
+		return n1.add(n2).stripTrailingZeros();
 	}
 	
 	public BigDecimal substraction(BigDecimal n1, BigDecimal n2) {
-		return n1.subtract(n2);
+		return n1.subtract(n2).stripTrailingZeros();
 	}
 	
 	public BigDecimal multiplication(BigDecimal n1, BigDecimal n2) {
@@ -36,9 +36,9 @@ public class CalcManagerImpl implements CalcManager{
 			result = result.multiply(n1);
 		}
 		if(n2.compareTo(ZERO) >= 0) {
-			return result;	
+			return result.stripTrailingZeros();	
 		}else {
-			return ONE.divide(result, 7, RoundingMode.HALF_EVEN);
+			return ONE.divide(result, 7, RoundingMode.HALF_EVEN).stripTrailingZeros();
 		}
 		
 	}
@@ -64,7 +64,20 @@ public class CalcManagerImpl implements CalcManager{
 		}
 		
 		
-		return result;
+		return result.stripTrailingZeros();
+	}
+	
+	public BigDecimal factorial(BigDecimal n) {
+		BigDecimal i = ZERO;
+		BigDecimal result = ONE;
+		
+		while(i.compareTo(n) < 0) {
+			result = result.multiply(i.add(ONE));
+			i = i.add(ONE);
+			System.out.println(i);
+			System.out.println(result);
+		}
+		return result.stripTrailingZeros();
 	}
 	
 	

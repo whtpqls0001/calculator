@@ -3,6 +3,8 @@ package test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.math.BigDecimal;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,6 +51,7 @@ public class ManagerTest {
 		assertThat(cmgr.multiplication(inputBean.getInputNum1(), inputBean.getInputNum2()).toString(), is("4.5"));
 		assertThat(cmgr.division(inputBean.getInputNum1(), inputBean.getInputNum2()).toString(), is("1.125"));
 		assertThat(cmgr.power(inputBean.getInputNum1(), inputBean.getInputNum2()).toString(), is("5.0625"));
+		assertThat(cmgr.factorial(BigDecimal.valueOf(5)).toPlainString(), is("120"));
 	}
 
 }
